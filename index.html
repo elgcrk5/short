@@ -66,6 +66,37 @@
         outline: 0;
       }
 
+      details {
+        margin: 1rem 0 2rem;
+        border: 1px solid var(--border-color);
+        border-radius: .25rem;
+        transition: background .3s;
+      }
+
+      details[open] {
+        background: #fff;
+      }
+
+      details summary {
+        padding: .5rem 1rem;
+        font-weight: 500;
+        user-select: none;
+        cursor: pointer;
+        opacity: .8;
+        outline: 0;
+      }
+
+      details div {
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      details small {
+        margin: 0;
+        font-size: .875rem;
+        line-height: 2;
+      }
+
       button {
         appearance: none;
         display: flex;
@@ -117,6 +148,15 @@
       <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
       <p>Paste the URL to be shortened</p>
       <input placeholder="https://example.com" x-model="url" x-ref="url" />
+      
+      <details>
+        <summary>Pengaturan kustom</summary>
+        <div>
+          <input placeholder="namabelakangcustom" x-model="slug" />
+          <small>Slug secara default adalah ID pendek yang dihasilkan secara acak.</small>
+        </div>
+      </details>
+      
       <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">Shorten URL</button>
     </main>
     <footer>
