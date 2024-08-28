@@ -85,6 +85,14 @@
             cursor: pointer;
             opacity: .8;
             outline: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        details summary img {
+            margin-right: 0.5rem;
+            width: 20px;
+            height: 20px;
         }
 
         details div {
@@ -172,29 +180,25 @@
         <input placeholder="https://example.com" x-model="url" x-ref="url">
 
         <details>
-            <summary>Customize link</summary>
+            <summary>
+                <img src="https://www.shorturl.at/img/icon-url.png" alt="Customize link icon">
+                Customize link
+            </summary>
             <div>
                 <label>
                     <input type="checkbox" x-model="customizeLink">
                     customize link
                 </label>
-                <label>
-                    <input type="checkbox" x-model="password">
-                    link with password
-                </label>
-                <label>
-                    <input type="checkbox" x-model="setDates">
-                    set dates
-                </label>
-                <label>
-                    <input type="checkbox" x-model="qrCode">
-                    generate QR code
-                </label>
-                <label>
-                    <input type="checkbox" x-model="customPath">
-                    set the custom path
-                </label>
+                
+                <!-- Show custom path option only when "customize link" is checked -->
+                <template x-if="customizeLink">
+                    <label>
+                        <input type="checkbox" x-model="customPath">
+                        set the custom path
+                    </label>
+                </template>
 
+                <!-- Show custom path information only when "set the custom path" is checked -->
                 <template x-if="customPath">
                     <div class="customized-link-info">
                         Your customized link will have the following path: /
@@ -215,9 +219,6 @@
         const app = {
             url: '',
             customizeLink: false,
-            password: false,
-            setDates: false,
-            qrCode: false,
             customPath: false,
             alert: null,
             loading: false,
