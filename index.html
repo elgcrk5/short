@@ -170,6 +170,28 @@
             font-size: .875rem;
             color: #0066cc;
         }
+
+        .input-with-prefix {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: .25rem;
+            padding: .5rem 1rem;
+            margin-top: 1rem;
+        }
+
+        .input-with-prefix span {
+            font-size: 1rem;
+            color: #33404d;
+            margin-right: 0.5rem;
+        }
+
+        .input-with-prefix input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -179,29 +201,21 @@
         <p>Paste the URL to be shortened</p>
         <input placeholder="https://example.com" x-model="url" x-ref="url">
 
-        <details>
+        <details open>
             <summary>
                 <img src="https://www.shorturl.at/img/icon-url.png" alt="Customize link icon">
                 Customize link
             </summary>
             <div>
-                <label>
-                    <input type="checkbox" x-model="customizeLink">
-                    customize link
-                </label>
-                
-                <!-- Show custom path option only when "customize link" is checked -->
-                <template x-if="customizeLink">
-                    <label>
-                        <input type="checkbox" x-model="customPath">
-                        set the custom path
-                    </label>
-                </template>
+                <div class="input-with-prefix">
+                    <span>Path:</span>
+                    <input type="text" placeholder="http://example.com" x-model="customPath">
+                </div>
 
-                <!-- Show custom path information only when "set the custom path" is checked -->
+                <!-- Show custom path information -->
                 <template x-if="customPath">
                     <div class="customized-link-info">
-                        Your customized link will have the following path: /
+                        Your customized link will have the following path: <span x-text="customPath"></span>
                     </div>
                 </template>
             </div>
@@ -218,8 +232,7 @@
     <script>
         const app = {
             url: '',
-            customizeLink: false,
-            customPath: false,
+            customPath: '',
             alert: null,
             loading: false,
             isValidated() {
@@ -240,7 +253,7 @@
                 this.loading = true;
 
                 const body = { url: this.url };
-                if (this.customPath) body.slug = this.slug;  // Example of how custom path might be handled
+                if (this.customPath) body.slug = this.customPath;  // Example of how custom path might be handled
 
                 fetch('/create', {
                     method: 'post',
