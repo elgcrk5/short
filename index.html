@@ -1,220 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <link rel="icon" href="asset/img/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short URL</title>
     <style>
-      :root {
-        --color-primary: #007bff;
-        --color-primary-dark: #0056b3;
-        --color-primary-alpha: #007bff50;
+        /* Existing styles */
+        :root {
+            --color-primary: #007bff;
+            --color-primary-dark: #0056b3;
+            --color-primary-alpha: #007bff50;
 
-        --body-color: #495057;
-        --body-bg: #f8f9fa;
+            --body-color: #495057;
+            --body-bg: #f8f9fa;
 
-        --border-color: #dee2e6;
-      }
+            --border-color: #dee2e6;
+        }
 
-      body {
-        max-width: 30rem;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        color: var(--body-color);
-        background: var(--body-bg);
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.5;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        text-rendering: optimizelegibility;
-        -webkit-font-smoothing: antialiased;
-      }
+        body {
+            max-width: 30rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            color: var(--body-color);
+            background: var(--body-bg);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            text-rendering: optimizelegibility;
+            -webkit-font-smoothing: antialiased;
+        }
 
-      h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-        color: var(--color-primary-dark);
-      }
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: var(--color-primary-dark);
+        }
 
-      p {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-      input {
-        -webkit-appearance: none;
-        appearance: none;
-        display: block;
-        width: 100%;
-        padding: .5rem 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: .25rem;
-        box-sizing: border-box;
-        color: #33404d;
-        line-height: inherit;
-        font-size: 1rem;
-        transition: border .3s, box-shadow .3s;
-        margin-bottom: 1rem;
-      }
+        input {
+            -webkit-appearance: none;
+            appearance: none;
+            display: block;
+            width: 100%;
+            padding: .5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: .25rem;
+            box-sizing: border-box;
+            color: #33404d;
+            line-height: inherit;
+            font-size: 1rem;
+            transition: border .3s, box-shadow .3s;
+            margin-bottom: 1rem;
+        }
 
-      input:focus {
-        box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
-        border-color: var(--color-primary);
-        outline: 0;
-      }
+        input:focus {
+            box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
+            border-color: var(--color-primary);
+            outline: 0;
+        }
 
-      details {
-        margin: 1rem 0 2rem;
-        border: 1px solid var(--border-color);
-        border-radius: .25rem;
-        transition: background .3s;
-      }
+        details {
+            margin: 1rem 0 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: .25rem;
+            transition: background .3s;
+        }
 
-      details[open] {
-        background: #fff;
-      }
+        details[open] {
+            background: #fff;
+        }
 
-      details summary {
-        padding: .5rem 1rem;
-        font-weight: 500;
-        user-select: none;
-        cursor: pointer;
-        opacity: .8;
-        outline: 0;
-      }
+        details summary {
+            padding: .5rem 1rem;
+            font-weight: 500;
+            user-select: none;
+            cursor: pointer;
+            opacity: .8;
+            outline: 0;
+        }
 
-      details div {
-        padding: 1rem;
-        border-top: 1px solid var(--border-color);
-      }
+        details div {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
 
-      details small {
-        margin: 0;
-        font-size: .875rem;
-        line-height: 2;
-      }
+        details small {
+            margin: 0;
+            font-size: .875rem;
+            line-height: 2;
+        }
 
-      button {
-        appearance: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: .5rem .75rem;
-        border: 1px solid var(--color-primary);
-        border-radius: .25rem;
-        background: var(--color-primary);
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: inherit;
-        cursor: pointer;
-        user-select: none;
-        transition: border .3s, background .3s;
-      }
+        label {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
 
-      button:hover {
-        border-color: var(--color-primary-dark);
-        background: var(--color-primary-dark);
-      }
+        label input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
 
-      button:focus {
-        box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
-        border-color: var(--color-primary);
-        outline: 0;
-      }
+        button {
+            appearance: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: .5rem .75rem;
+            border: 1px solid var(--color-primary);
+            border-radius: .25rem;
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: inherit;
+            cursor: pointer;
+            user-select: none;
+            transition: border .3s, background .3s;
+        }
 
-      button:disabled {
-        background: var(--color-primary);
-        border-color: var(--color-primary);
-        opacity: .6;
-        cursor: not-allowed;
-      }
+        button:hover {
+            border-color: var(--color-primary-dark);
+            background: var(--color-primary-dark);
+        }
 
-      footer {
-        padding: 1rem;
-        border-top: 1px solid var(--border-color);
-        text-align: center;
-        opacity: .5;
-      }
+        button:focus {
+            box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
+            border-color: var(--color-primary);
+            outline: 0;
+        }
+
+        button:disabled {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            opacity: .5;
+        }
+
+        .customized-link-info {
+            background-color: #f1f9ff;
+            border: 1px solid #d1e9ff;
+            padding: 0.75rem;
+            border-radius: .25rem;
+            margin-top: 1rem;
+            font-size: .875rem;
+            color: #0066cc;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header><h1>Short URL</h1></header>
     <main x-data="app" x-cloak>
-      <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
-      <p>Paste the URL to be shortened</p>
-      <input placeholder="https://example.com" x-model="url" x-ref="url" />
-      
-      <details>
-        <summary>customize link</summary>
-        <div>
-          <input placeholder="set the custom path" x-model="slug" />
-          <small>Your customized link will have the following path: /</small>
-        </div>
-      </details>
-      
-      <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">Shorten URL</button>
+        <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
+        <p>Paste the URL to be shortened</p>
+        <input placeholder="https://example.com" x-model="url" x-ref="url">
+
+        <details>
+            <summary>Customize link</summary>
+            <div>
+                <label>
+                    <input type="checkbox" x-model="customizeLink">
+                    customize link
+                </label>
+                <label>
+                    <input type="checkbox" x-model="password">
+                    link with password
+                </label>
+                <label>
+                    <input type="checkbox" x-model="setDates">
+                    set dates
+                </label>
+                <label>
+                    <input type="checkbox" x-model="qrCode">
+                    generate QR code
+                </label>
+                <label>
+                    <input type="checkbox" x-model="customPath">
+                    set the custom path
+                </label>
+
+                <template x-if="customPath">
+                    <div class="customized-link-info">
+                        Your customized link will have the following path: /
+                    </div>
+                </template>
+            </div>
+        </details>
+
+        <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">
+            Shorten URL
+        </button>
     </main>
     <footer>
-      ShortURL is a free tool to shorten URLs and generate short links.
+        ShortURL is a free tool to shorten URLs and generate short links.
     </footer>
     <script src="asset/js/alpine.js"></script>
     <script>
-      const app = {
-        url: '',
-        slug: '',
-        alert: null,
-        loading: false,
-        isValidated() {
-          return !/^https?:\/\/.{3,}/.test(this.url);
-        },
-        submit($refs, $nextTick) {
-          if (!this.url) {
-            this.alert = { type: 'error', message: 'Missing required parameter: url.' };
-            return;
-          }
+        const app = {
+            url: '',
+            customizeLink: false,
+            password: false,
+            setDates: false,
+            qrCode: false,
+            customPath: false,
+            alert: null,
+            loading: false,
+            isValidated() {
+                return !/^https?:\/\/.{3,}/.test(this.url);
+            },
+            submit($refs, $nextTick) {
+                if (!this.url) {
+                    this.alert = { type: 'error', message: 'Missing required parameter: url.' };
+                    return;
+                }
 
-          if (this.isValidated()) {
-            this.alert = { type: 'error', message: 'Invalid format: url.' };
-            return;
-          }
+                if (this.isValidated()) {
+                    this.alert = { type: 'error', message: 'Invalid format: url.' };
+                    return;
+                }
 
-          this.alert = null;
-          this.loading = true;
+                this.alert = null;
+                this.loading = true;
 
-          const body = { url: this.url };
-          if (this.slug) body.slug = this.slug;
+                const body = { url: this.url };
+                if (this.customPath) body.slug = this.slug;  // Example of how custom path might be handled
 
-          fetch('/create', {
-            method: 'post',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(body)
-          })
-            .then(res => res.json())
-            .then(res => {
-              this.loading = false;
-              if (res.message) {
-                this.alert = { type: 'error', message: res.message };
-                return;
-              }
+                fetch('/create', {
+                    method: 'post',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(body)
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        this.loading = false;
+                        if (res.message) {
+                            this.alert = { type: 'error', message: res.message };
+                            return;
+                        }
 
-              this.url = res.link;
+                        this.url = res.link;
 
-              $nextTick(() => {
-                $refs.url.select();
-                this.alert = { type: 'success', message: `Link ${document.execCommand('Copy') ? 'copied' : 'generated'}` };
-              });
-            })
-            .catch(e => {
-              this.alert = { type: 'error', message: e.message };
-              this.loading = false;
-            });
-        }
-      };
+                        $nextTick(() => {
+                            $refs.url.select();
+                            this.alert = { type: 'success', message: `Link ${document.execCommand('Copy') ? 'copied' : 'generated'}` };
+                        });
+                    })
+                    .catch(e => {
+                        this.alert = { type: 'error', message: e.message };
+                        this.loading = false;
+                    });
+            }
+        };
     </script>
-  </body>
+</body>
 </html>
