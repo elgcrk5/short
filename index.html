@@ -209,15 +209,13 @@
             <div>
                 <div class="input-with-prefix">
                     <span>Path:</span>
-                    <input type="text" placeholder="http://example.com" x-model="customPath">
+                    <input type="text" placeholder="set the custom path" x-model="customPath">
                 </div>
 
                 <!-- Show custom path information -->
-                <template x-if="customPath">
-                    <div class="customized-link-info">
-                        Your customized link will have the following path: <span x-text="customPath"></span>
-                    </div>
-                </template>
+                <div class="customized-link-info">
+                    Your customized link will have the following path: <span x-text="customPath || '/'"></span>
+                </div>
             </div>
         </details>
 
